@@ -12,7 +12,7 @@
     </div>
 </body>
 
-> **Version (arch:2 | major:4 | minor:2): 1.4.0**
+> **Version (arch:2 | major:4 | minor:2): 1.4.1**
 > 
 [![GitHub CI](https://github.com/VisorFolks/cyancore/actions/workflows/github_ci.yml/badge.svg)](https://github.com/VisorFolks/cyancore/actions/workflows/github_ci.yml)
 
