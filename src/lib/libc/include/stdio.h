@@ -35,6 +35,8 @@ int fputc(const FILE *, const char);
 int fgetc(const FILE *, char *);
 char getch();
 char getchar();
+char *gets();
+int scanf(const char * restrict, ...);
 
 #ifdef _STDBOOL_H_
 int fprintf(const FILE *, bool, const char *fmt, ...);
