@@ -182,7 +182,7 @@ int scanf(const char * restrict fmt, ...)
 				}
 				case 'f':
 				{
-					char buff[50];
+					char *buff = (char *)malloc(sizeof(char) * 50);
 					gets(buff);
 					*(float *)va_arg(ap, float *) = (float)atof(buff);
 					count++;
