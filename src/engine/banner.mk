@@ -9,7 +9,7 @@
 #
 
 NAME		= Boron
-VERSION		= 0x01000400
+VERSION		= 0x01000401
 
 $(eval $(call add_define,VERSION))
 
