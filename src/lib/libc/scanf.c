@@ -52,10 +52,10 @@ char getchar()
  * @brief This function will take string input with spaces
  *
  */
-char *gets()
+char *gets(char *str)
 {
-	char *s = (char *)malloc(sizeof(char)), temp;
-	int i = 0;
+	char *p = str;
+	char temp;
 	do
 	{
 		temp = getch();
@@ -66,10 +66,11 @@ char *gets()
 		}
 		else
 		{
-			s[i++] = temp;
+			*str++ = temp;
 		}
 	} while(temp != '\r');
-	return s;
+	str = '\0';
+	return p;
 }
 
 /**
@@ -80,8 +81,6 @@ char *gets()
  *
  */
 
-#define CURRCHAR (temp)
-#define CHARIN() (temp = getch())
 int scanf(const char * restrict fmt, ...)
 {
 	unsigned int count = 0;
@@ -105,19 +104,19 @@ int scanf(const char * restrict fmt, ...)
 				case 'c':
 				{
 					/* skip leading spaces */
-					while (isSpace(CHARIN()))
+					while (isSpace(temp = getch()))
 					{
-						if (CURRCHAR == '\r')
+						if (temp == '\r')
 							fputc(stdout, '\n');
 						else
-							fputc(stdout, CURRCHAR);
+							fputc(stdout, temp);
 					}
-					fputc(stdout, CURRCHAR);
-					c = CURRCHAR;
-					while (CHARIN())
+					fputc(stdout, temp);
+					c = temp;
+					while ((temp = getch()))
 					{
-						fputc(stdout, CURRCHAR);
-						if (isSpace(CURRCHAR))
+						fputc(stdout, temp);
+						if (isSpace(temp))
 							break;
 					}
 					fputc(stdout, '\n');
@@ -129,21 +128,21 @@ int scanf(const char * restrict fmt, ...)
 				{
 					char *s = va_arg(ap, char *);
 					/* skip leading spaces */
-					while (isSpace(CHARIN()))
+					while (isSpace(temp = getch()))
 					{
-						if (CURRCHAR == '\r')
+						if (temp == '\r')
 							fputc(stdout, '\n');
 						else
-							fputc(stdout, CURRCHAR);
+							fputc(stdout, temp);
 					}
-					fputc(stdout, CURRCHAR);
-					*s++ = CURRCHAR;
-					while (CHARIN())
+					fputc(stdout, temp);
+					*s++ = temp;
+					while ((temp = getch()))
 					{
-						fputc(stdout, CURRCHAR);
-						if (isSpace(CURRCHAR))
+						fputc(stdout, temp);
+						if (isSpace(temp))
 							break;
-						*s++ = CURRCHAR;
+						*s++ = temp;
 					}
 					fputc(stdout, '\n');
 					*s = '\0';
@@ -155,26 +154,26 @@ int scanf(const char * restrict fmt, ...)
 				{
 					int a = 0;
 					/* skip leading spaces */
-					while (isSpace(CHARIN()))
+					while (isSpace(temp = getch()))
 					{
-						if (CURRCHAR == '\r')
+						if (temp == '\r')
 							fputc(stdout, '\n');
 						else
-							fputc(stdout, CURRCHAR);
+							fputc(stdout, temp);
 					}
-					fputc(stdout, CURRCHAR);
-					c = CURRCHAR;
-					while (CHARIN())
+					fputc(stdout, temp);
+					c = temp;
+					while ((temp = getch()))
 					{
 						a *= 10;
 						if (isDigit(c))
 							a += (c - '0');
 						else
 							a += (int)c;
-						if (isSpace(CURRCHAR))
+						if (isSpace(temp))
 							break;
-						c = CURRCHAR;
-						fputc(stdout, CURRCHAR);
+						c = temp;
+						fputc(stdout, temp);
 					}
 					fputc(stdout, '\n');
 					*(int *)va_arg(ap, int *) = a;
@@ -183,8 +182,9 @@ int scanf(const char * restrict fmt, ...)
 				}
 				case 'f':
 				{
-					char *a = gets();
-					*(float *)va_arg(ap, float *) = (float)atof(a);
+					char buff[50];
+					gets(buff);
+					*(float *)va_arg(ap, float *) = (float)atof(buff);
 					count++;
 					break;
 				}
