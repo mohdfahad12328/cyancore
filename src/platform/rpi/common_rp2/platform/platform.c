@@ -52,7 +52,6 @@ static void platform_memory_layout()
 	_stack_start, _stack_end, _stack_size,
 	_bss_start, _bss_size, _bss_end,
 	_heap_start, _heap_size, _heap_end,
-	_itim_vstart, _itim_size, _itim_vend,
 	_flash_size, _ram_size;
 
 	syslog(info, "\n");
@@ -63,8 +62,6 @@ static void platform_memory_layout()
 			&_text_start, &_text_end, &_text_size);
 	syslog(info, "rodata Region\t: %010p - %010p : Size: %u\n",
 			&_rodata_start, &_rodata_end, &_rodata_size);
-	syslog(info, "ITIM Region\t: %010p - %010p : Size: %u\n",
-			&_itim_vstart, &_itim_vend, &_itim_size);
 	syslog(info, "bss Region\t: %010p - %010p : Size: %u\n",
 			&_bss_start, &_bss_end, &_bss_size);
 	syslog(info, "data Region\t: %010p - %010p : Size: %u\n",
@@ -79,32 +76,19 @@ static void platform_memory_layout()
 
 void platform_setup()
 {
-/*
 	status_t ret = success;
-*/
-
-#if PRCI_CLK
-	status_t ret = success;
-	if(ret != success)
-		exit(EXIT_FAILURE);
-#endif
 
 	driver_setup("earlycon");
 	bootmsgs_enable();
-#ifdef BOOTLOADER
-	cyancore_insignia_lite();
-#else
+#ifndef BOOTLOADER
 	cyancore_insignia();
 #endif
 
 #if PRINT_MEMORY_LAYOUT
 	platform_memory_layout();
 #endif
-/* Uncomment this and remove above check if more conditions
- * are introduced.
 	if(ret != success)
 		exit(EXIT_FAILURE);
-*/
 	return;
 }
 
