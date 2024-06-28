@@ -11,8 +11,8 @@
 
 #pragma once
 
-#define MTCMP_OFFSET		(0x0)
-#define MTIME_OFFSET		(0x8)
+#define MTCMP_OFFSET		(0x8)
+#define MTIME_OFFSET		(0x0)
 
 typedef struct clint_port
 {

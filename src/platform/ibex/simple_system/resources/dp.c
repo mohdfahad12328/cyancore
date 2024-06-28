@@ -25,7 +25,7 @@ create_memory(mem, RAM_START, RAM_LENGTH);
 
 create_module(uart0, (uart | 0), 0x20000, 0x1, 0, 0);
 
-create_module(timer_core0, (timer | 0), 0, 0, 10000000, 0,
+create_module(timer_core0, (timer | 0), 0, 0, 2000000, 0,
 		add_irq(0, int_local, 7, int_level));
 
 create_module(clint0, clint, 0x30000, 16, 0, 0);

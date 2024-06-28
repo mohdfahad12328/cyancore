@@ -108,7 +108,7 @@ static status_t plat_get_timer_prop(void)
 static uint64_t plat_get_timer_ticks_msec(uint64_t freq)
 {
 	/* Compute ticks needed for 1 msec */
-	return (uint64_t)(freq);
+	return (uint64_t)(freq/1000);
 }
 
 /**
@@ -133,7 +133,7 @@ static void plat_timer_set_period(unsigned int p)
 		syslog(fail, "Failed to configure timer, Err = %p\n", ret);
 		plat_panic_handler();
 	}
-	//arch_ei_mtime();
+	arch_ei_mtime();
 }
 
 /**
