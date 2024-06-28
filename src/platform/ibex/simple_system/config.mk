@@ -27,6 +27,9 @@ $(eval $(call add_define,BIT))
 RV_VEC_MODE	:= 1
 $(eval $(call add_define,RV_VEC_MODE))
 
+RV_NO_WFI	:= 1
+$(eval $(call add_define,RV_NO_WFI))
+
 BOOT_CORE_ID:= 0
 $(eval $(call add_define,BOOT_CORE_ID))
 
