@@ -15,7 +15,6 @@
 #include <ccpfs.h>
 #include <stdio.h>
 #include <stddev.h>
-#include <stdlib.h>
 #include <stdarg.h>
 #include <ctype.h>
 
@@ -46,155 +45,200 @@ char getchar()
     return c;
 }
 
-/**
- * get string with spaces
- *
- * @brief This function will take string input with spaces
- *
- */
-char *gets(char *str)
+int vscanf(const FILE *dev, const char *fmt, va_list args)
 {
-	char *p = str;
-	char temp;
-	do
+	int ret = 0;
+	int l_ret;
+	int N;
+	char c;
+	while (*fmt != '\0')
 	{
-		temp = getch();
-		fputc(stdout, temp);
-		if(temp == '\r')
-		{
-			fputc(stdout, '\n');
-		}
-		else
-		{
-			*str++ = temp;
-		}
-	} while(temp != '\r');
-	str = '\0';
-	return p;
-}
-
-/**
- * scanf
- *
- * @brief This function will take standard input for default data types.
- *	  input will break at spaces
- *
- */
-
-int scanf(const char * restrict fmt, ...)
-{
-	unsigned int count = 0;
-	char c = '0', temp;
-	va_list ap;
-	va_start(ap, fmt);
-	while (*fmt)
-	{
+		l_ret = 0;
 		if (*fmt == '%')
 		{
 			fmt++;
-			/* char length : %7d */
-			unsigned int cl = 0;
-			while (isDigit(*fmt))
+loop:
+			switch (*fmt)
 			{
-				cl *= 10;
-				cl += *fmt++ - '0';
-			}
-			switch (*fmt++)
-			{
-				case 'c':
+				case 'i':
+				case 'd':
 				{
-					/* skip leading spaces */
-					while (isSpace(temp = getch()))
+					int a = 0;
+					N = 0;
+					// skip leading whitespaces
+					do
 					{
-						if (temp == '\r')
+						fgetc(dev, &c);
+						if (c == '\r')
 							fputc(stdout, '\n');
 						else
-							fputc(stdout, temp);
-					}
-					fputc(stdout, temp);
-					c = temp;
-					while ((temp = getch()))
+							fputc(stdout, c);
+					} while (isSpace(c));
+					// initialize first int digit
+					if (c == '-')
+						N = 1;
+					else if (isDigit(c))
+						a = c - '0';
+					// append rest of digits till whitespace
+					do
 					{
-						fputc(stdout, temp);
-						if (isSpace(temp))
-							break;
-					}
-					fputc(stdout, '\n');
-					*(char *)va_arg(ap, char *) = c;
-					count++;
+						fgetc(dev, &c);
+						if (isDigit(c))
+						{
+							a *= 10;
+							a += (c - '0');
+							fputc(stdout, c);
+						}
+						else if (a && (c == 0x7f || c== 0x08))
+						{
+							a /= 10;
+							fputs(stdout, "\b \b");
+						}
+					} while (!isSpace(c));
+					(c == '\r') ? fputc(stdout, '\n') : fputc(stdout, c);
+					if (l_ret >= 2)
+						*(int64_t *)va_arg(args, int64_t *) = (N) ? -(a) : a;
+					else if (l_ret == 1)
+						*(long *)va_arg(args, long *) = (N) ? -(a) : a;
+					else
+						*(int *)va_arg(args, int *) = (N) ? -(a) : a;
+					ret++;
+					break;
+				}
+				case 'l':
+				{
+					l_ret++;
+					fmt++;
+					goto loop;
+				}
+#if USE_FLOAT == 1
+				case 'f':
+				{
+					float a = 0;
+					unsigned int rp = 0; // radix point
+					float e = 1;
+					unsigned int fl = 1; // floating length - length after radix point
+					N = 0;
+					// skip leading whitespaces
+					do
+					{
+						fgetc(dev, &c);
+						if (c == '\r')
+							fputc(stdout, '\n');
+						else
+							fputc(stdout, c);
+					} while (isSpace(c));
+					if (c == '.')
+						rp = 1;
+					else if (c == '-')
+						N = 1;
+					else if (isDigit(c))
+						a = (float)(c - '0');
+					// append rest of digits till whitespace
+					do
+					{
+						fgetc(dev, &c);
+						if (!rp && c == '.')
+						{
+							rp = 1;
+							fputc(stdout, c);
+						}
+						else if (isDigit(c))
+						{
+							if (rp)
+							{
+								e /= 10.0;
+								a += (e * (float)(c - '0'));
+								fl *= 10;
+							}
+							else
+							{
+								a *= 10.0;
+								a += (float)(c - '0');
+							}
+							fputc(stdout, c);
+						}
+						else if (a && (c == 0x7f || c == 0x08))
+						{
+							long d = (long)a;
+							float frac = a - (float)d;
+							if (frac == 0.0 && rp)
+								rp = 0;
+							else if (rp)
+							{
+								fl /= 10;
+								frac *= fl;
+								frac = (long)frac / (float)fl;
+								a = d + frac;
+							}
+							else
+								a = (int)a / 10;
+							fputs(stdout, "\b \b");
+						}
+					} while (!isSpace(c));
+					(c == '\r') ? fputc(stdout, '\n') : fputc(stdout, c);
+					*(float *)va_arg(args, float *) = (N) ? -(a) : a;
+					ret++;
+					break;
+				}
+#endif
+				case 'c':
+				{
+					*(char *)va_arg(args, char *) = getchar();
+					ret++;
 					break;
 				}
 				case 's':
 				{
-					char *s = va_arg(ap, char *);
-					/* skip leading spaces */
-					while (isSpace(temp = getch()))
+					int i = 0;
+					char *s = va_arg(args, char *);
+					//skip leading whitespaces
+					do
 					{
-						if (temp == '\r')
+						fgetc(dev, &c);
+						if (c == '\r')
 							fputc(stdout, '\n');
 						else
-							fputc(stdout, temp);
-					}
-					fputc(stdout, temp);
-					*s++ = temp;
-					while ((temp = getch()))
+							fputc(stdout, c);
+					} while (isSpace(c));
+					s[i++] = c;
+					do
 					{
-						fputc(stdout, temp);
-						if (isSpace(temp))
+						fgetc(dev, &c);
+						if (isSpace(c))
 							break;
-						*s++ = temp;
-					}
-					fputc(stdout, '\n');
-					*s = '\0';
-					count++;
-					break;
-				}
-				case 'u':
-				case 'd':
-				{
-					int a = 0;
-					/* skip leading spaces */
-					while (isSpace(temp = getch()))
-					{
-						if (temp == '\r')
-							fputc(stdout, '\n');
+						else if (i && (c == 0x7f || c == 0x08))
+						{
+							i--;
+							fputs(stdout, "\b \b");
+						}
 						else
-							fputc(stdout, temp);
-					}
-					fputc(stdout, temp);
-					c = temp;
-					while ((temp = getch()))
-					{
-						a *= 10;
-						if (isDigit(c))
-							a += (c - '0');
-						else
-							a += (int)c;
-						if (isSpace(temp))
-							break;
-						c = temp;
-						fputc(stdout, temp);
-					}
-					fputc(stdout, '\n');
-					*(int *)va_arg(ap, int *) = a;
-					count++;
-					break;
-				}
-				case 'f':
-				{
-					char *buff = (char *)malloc(sizeof(char) * 50);
-					gets(buff);
-					*(float *)va_arg(ap, float *) = (float)atof(buff);
-					count++;
+							s[i++] = c;
+						fputc(stdout, c);
+					} while (!isSpace(c));
+					(c == '\r') ? fputc(stdout, '\n') : fputc(stdout, c);
+					s[i] = '\0';
+					ret++;
 					break;
 				}
 				default:
-					break;
+					return -1;
 			}
 			continue;
 		}
 		/* increment pointer if % not found */
 		fmt++;
 	}
-	return count;
+	fputc(stdout, '\n');
+	return ret;
+}
+
+int scanf(const char *fmt, ...)
+{
+	int ret;
+	va_list va;
+	va_start(va, fmt);
+	ret = vscanf(stdin, fmt, va);
+	va_end(va);
+	return ret;
 }

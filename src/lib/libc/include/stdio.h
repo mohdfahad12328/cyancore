@@ -30,17 +30,17 @@ extern FILE stddev[];
 
 int __printf(const char *fmt, ...);
 int __eprintf(const char *fmt, ...);
+int scanf(const char *fmt, ...);
 int fputs(const FILE *, const char *);
 int fputc(const FILE *, const char);
 int fgetc(const FILE *, char *);
 char getch();
 char getchar();
-char *gets();
-int scanf(const char * restrict, ...);
 
 #ifdef _STDBOOL_H_
 int fprintf(const FILE *, bool, const char *fmt, ...);
 #ifdef _STDARG_H_
+int vscanf(const FILE *, const char *fmt, va_list args);
 int vprintf(const FILE *, bool, const char *fmt, va_list args);
 #endif
 #endif
