@@ -62,7 +62,9 @@ void arch_early_setup()
 	arch_di_mei();
 	arch_di_mtime();
 	arch_di_msoftirq();
+#ifndef RV_VEC_MODE
 	riscv_update_vector();
+#endif
 	return;
 }
 
