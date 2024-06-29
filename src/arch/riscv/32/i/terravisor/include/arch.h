@@ -156,10 +156,12 @@ static inline void arch_nop()
 
 static inline void arch_wfi()
 {
+#ifndef RV_NO_WFI
 	asm volatile("wfi");
 #if ERRATA_CIP578
 	arch_nop();
 	arch_nop();
+#endif
 #endif
 }
 

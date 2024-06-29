@@ -69,9 +69,16 @@ function exception_handler_base
 	EPILOGUE
 	mret
 
+#ifndef RV_VEC_MODE
 function riscv_update_vector
 	la	a0, exception_handler_base
 	csrw	mtvec, a0
 	mv	a0, zero
 	fence.i
 	ret
+#else
+vectors vtors
+.rept 32
+	j	exception_handler_base
+.endr
+#endif
