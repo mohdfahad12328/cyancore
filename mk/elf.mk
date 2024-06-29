@@ -20,6 +20,10 @@ ELF		:= $(addprefix $(OUT)/,$(PROJECT).elf)
 LD_SCRIPT	:= $(addprefix $(OUT)/,$(LD_SCRIPT:.ld.sx=.ld))
 LD_SUPPLEMENT	:= $(addprefix $(OUT)/,$(LD_SUPPLEMENT:.ld.sx=.ld))
 
+ifneq ($(FLASH_START),)
+SIZE_ARGS	:= -m Flash $(FLASH_START) $(FLASH_SIZE)
+endif
+
 elf: $(ELF)
 
 .SECONDEXPANSION:
@@ -30,8 +34,7 @@ $(ELF): $(DEP_LIBS) $(DEP_OBJS) $(LD_SCRIPT) $(LD_SUPPLEMENT) | $$(SIZE)
 	$(OD) -Dx -h --wide $@ > $(@:.elf=.lst)
 	$(OC) -O binary $@ $(@:.elf=.bin)
 	$(OC) -O ihex $@ $(@:.elf=.hex)
-	@cd $(@D); $(SIZE) -f $(@F) -m Flash $(FLASH_START) $(FLASH_SIZE)	\
-	-m RAM $(RAM_START) $(RAM_SIZE) $(MEMSIZE_ARGS)
+	@cd $(@D); $(SIZE) -f $(@F) $(SIZE_ARGS) -m RAM $(RAM_START) $(RAM_SIZE) $(MEMSIZE_ARGS)
 	@echo ""
 
 $(OUT)/%.ld: %.ld.sx

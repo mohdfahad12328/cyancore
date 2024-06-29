@@ -48,6 +48,8 @@ jobs:
           make demo_riscv
           make demo_helios_avr
           make demo_helios_riscv
+          make demo_qemu_sifive_e
+          make demo_ibex_ss
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
