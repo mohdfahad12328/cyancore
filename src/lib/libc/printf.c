@@ -109,8 +109,10 @@ static int fltprint(const FILE *dev, bool en_stdout, double flt,
 	{
 		frac *= 10.0;
 		padf--;
+		d = (long) frac;
+		if (!d)
+			__fputc(dev, en_stdout, '0');
 	}
-	d = (long) frac;
 	ret += unumprint(dev, en_stdout, d,10, '0', 0);
 
 	return ret;
