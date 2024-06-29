@@ -1,9 +1,10 @@
 /*
  * CYANCORE LICENSE
- * Copyrights (C) 2019, Cyancore Team
+ * Copyrights (C) 2024, Cyancore Team
  *
  * File Name		: plat_mem.h
- * Description		: This file contains memory config of fe310-g002
+ * Description		: This file contains memory config of
+ *			  ibex simple system
  * Primary Author	: Akash Kollipara [akashkollipara@gmail.com]
  * Organisation		: Cyancore Core-Team
  */

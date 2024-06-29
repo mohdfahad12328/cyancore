@@ -1,6 +1,6 @@
 /*
  * CYANCORE LICENSE
- * Copyrights (C) 2019, Cyancore Team
+ * Copyrights (C) 2024, Cyancore Team
  *
  * File Name		: platform_reset.c
  * Description		: This file contains sources for platform
@@ -11,13 +11,7 @@
 
 #include <stdint.h>
 #include <status.h>
-#include <syslog.h>
-#include <assert.h>
 #include <reset.h>
-#include <resource.h>
-#include <arch.h>
-#include <aon.h>
-#include <driver/watchdog.h>
 #include <platform.h>
 #include <terravisor/platform.h>
 

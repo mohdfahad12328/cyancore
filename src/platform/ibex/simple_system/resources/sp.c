@@ -10,7 +10,6 @@
  */
 
 #include <status.h>
-#include <plat_defines.h>
 #include <resource.h>
 
 create_swdev(consoleUart, console_uart, (uart | 0), 0);

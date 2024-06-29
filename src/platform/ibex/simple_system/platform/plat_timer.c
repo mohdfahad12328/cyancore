@@ -1,6 +1,6 @@
 /*
  * CYANCORE LICENSE
- * Copyrights (C) 2022, Cyancore Team
+ * Copyrights (C) 2024, Cyancore Team
  *
  * File Name		: plat_timer.c
  * Description		: This file contains sources for platform

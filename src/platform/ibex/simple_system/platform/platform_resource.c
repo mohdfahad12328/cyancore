@@ -1,6 +1,6 @@
 /*
  * CYANCORE LICENSE
- * Copyrights (C) 2019-2022, Cyancore Team
+ * Copyrights (C) 2024, Cyancore Team
  *
  * File Name		: platform_resource.c
  * Description		: This file contains sources for platform
@@ -59,7 +59,7 @@ static void platform_fetch_sp(call_arg_t a0, call_arg_t a1 _UNUSED,
 	return;
 }
 
-INCLUDE_VCALL(sifive_fe310_fetch_sp, fetch_sp, platform_fetch_sp);
+INCLUDE_VCALL(ibex_ss_fetch_sp, fetch_sp, platform_fetch_sp);
 
 /**
  * platform_fetch_dp - vcall handler for fetch_dp
@@ -97,4 +97,4 @@ static void platform_fetch_dp(call_arg_t a0, call_arg_t a1 _UNUSED,
 	return;
 }
 
-INCLUDE_VCALL(sifive_fe310_fetch_dp, fetch_dp, platform_fetch_dp);
+INCLUDE_VCALL(ibex_ss_fetch_dp, fetch_dp, platform_fetch_dp);

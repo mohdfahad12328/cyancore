@@ -1,9 +1,9 @@
 #
 # CYANCORE LICENSE
-# Copyrights (C) 2019, Cyancore Team
+# Copyrights (C) 2024, Cyancore Team
 #
 # File Name		: build.mk
-# Description		: This file accumulates the build fe310 series
+# Description		: This file accumulates the build ibex simple system
 #			  platform arch sources
 # Primary Author	: Akash Kollipara [akashkollipara@gmail.com]
 # Organisation		: Cyancore Core-Team
