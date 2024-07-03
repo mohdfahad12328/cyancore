@@ -1,6 +1,6 @@
 /*
  * CYANCORE LICENSE
- * Copyrights (C) 2019, Cyancore Team
+ * Copyrights (C) 2024, Cyancore Team
  *
  * File Name		: arithmetic.c
  * Description		: This file contains sources of neo-math function
@@ -23,36 +23,6 @@
 unsigned int clog2(unsigned long num)
 {
 	return (num > 1) ? (1 + clog2((num & 0x01) ? ((num + 1) >> 1) : (num >> 1))) : 0;
-}
-
-/**
- * ceiling
- *
- * @brief Determines the ceiling of the input number
- *
- * @param[in] num: Input number
- *
- * @return ceiling
- */
-double ceiling(double num)
-{
-	long inum = (long) num;
-	return (double)(num - inum) ? (inum + 1) : num;
-}
-
-/**
- * floor
- *
- * @brief Determing the floor of the input number
- *
- * @param[in] num: Input number
- *
- * @return floor
- */
-double floor(double num)
-{
-	long inum = (long) num;
-	return (double)inum;
 }
 
 /**

@@ -1,6 +1,6 @@
 #
 # CYANCORE LICENSE
-# Copyrights (C) 2019, Cyancore Team
+# Copyrights (C) 2024, Cyancore Team
 #
 # File Name		: lib.mk
 # Description		: This file accumulates all the object files
@@ -18,10 +18,11 @@ include mk/lobj.mk
 LIB		:= $(addprefix $(OUT)/$(DIR)/,$(LIB))
 DEP_LIB_PATH	+= -L $(OUT)/$(DIR)
 DEP_LIBS	+= $(LIB)
+AR_FLAGS	?= rcs
 
-$(LIB): $(LIB_OBJS)
+$(LIB): $(LIB_OBJS) | $$(@D)/
 	@echo "Lib: Generating $(@F) ..."
-	$(AR) rc $@ $^
+	$(AR) $(AR_FLAGS) $@ $^
 
 LIB_INCLUDE_PATH:=
 LIB_OBJS	:=
