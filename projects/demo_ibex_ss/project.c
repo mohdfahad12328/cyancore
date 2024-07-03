@@ -10,10 +10,12 @@
 
 #include <status.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <terravisor/bootstrap.h>
 #include <driver.h>
 #include <time.h>
+#include <platform.h>
 
 void plug()
 {
@@ -21,23 +23,9 @@ void plug()
 	driver_setup_all();
 
 	printf("Demo Program!\n");
+	mdelay(1000);
+	printf("Bye...\n");
+	exit(EXIT_SUCCESS);
 	return;
 }
 
-
-void play()
-{
-	static unsigned char i = 0;
-	char progress[] = "-\\|/";
-	uint64_t time;
-	char c = progress[(i++) % strlen(progress)];
-	get_timestamp(&time);
-	time /= 1000U;
-
-	printf("[%012llu] Running Blinky ... [%c]", time, c);
-
-	mdelay(500);
-
-	printf("\r");
-	return;
-}
