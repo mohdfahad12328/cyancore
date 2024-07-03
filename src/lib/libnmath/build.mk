@@ -1,6 +1,6 @@
 #
 # CYANCORE LICENSE
-# Copyrights (C) 2019, Cyancore Team
+# Copyrights (C) 2024, Cyancore Team
 #
 # File Name		: build.mk
 # Descrption		: This script accumulates sources and build
@@ -21,3 +21,5 @@ include $(NMATH_PATH)/dsp/build.mk
 
 DIR		:= $(NMATH_PATH)
 include mk/lib.mk
+
+include $(NMATH_PATH)/libm/build.mk
