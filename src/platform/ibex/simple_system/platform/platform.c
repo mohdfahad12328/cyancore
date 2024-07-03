@@ -19,7 +19,9 @@
 #include <terravisor/platform.h>
 #include <visor/workers.h>
 #include <platform.h>
+#include <mmio.h>
 
+static void platform_sim_halt();
 
 void platform_early_setup()
 {
@@ -76,6 +78,7 @@ void platform_setup()
 	cyancore_insignia();
 	platform_print_cpu_info();
 	platform_memory_layout();
+	atexit(&platform_sim_halt);
 	return;
 }
 
@@ -83,4 +86,10 @@ void platform_cpu_setup()
 {
 	arch_ei();
 	return;
+}
+
+static void platform_sim_halt()
+{
+	uintptr_t sim_ctrl_base = 0x20000;
+	MMIO32(sim_ctrl_base + 0x8) = 1;
 }

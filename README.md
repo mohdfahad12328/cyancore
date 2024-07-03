@@ -35,8 +35,8 @@ For more information, please visit [**Github Wiki**](https://github.com/VisorFol
 
 ### Supported Platforms
 
-| Atmel      | SiFive        | STMicro     | TI          | Raspberry Pi |
-| ---------- | ------------- | ----------- | ----------- | -------------|
-| ATMega328P | FE310-G002    | Coming soon | Coming soon | Coming soon  |
-| ATMega2560 | QEMU SiFive-E |             |             |              |
+| Atmel      | SiFive        | STMicro     | TI          | Raspberry Pi  | ibex          |
+| ---------- | ------------- | ----------- | ----------- | ------------- | ------------- |
+| ATMega328P | FE310-G002    | Coming soon | Coming soon | Coming soon   | simple-system |
+| ATMega2560 | QEMU SiFive-E |             |             |               |               |
 
