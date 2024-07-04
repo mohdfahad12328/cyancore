@@ -14,17 +14,12 @@
 
 > **Version (arch:2 | major:4 | minor:2): 1.4.1**
 > 
-[![GitHub CI](https://github.com/VisorFolks/cyancore/actions/workflows/github_ci.yml/badge.svg)](https://github.com/VisorFolks/cyancore/actions/workflows/github_ci.yml)
+[![GitHub CI](https://github.com/VisorFolks/cyancore/actions/workflows/github_ci.yml/badge.svg)](https://github.com/VisorFolks/cyancore/actions/workflows/github_ci.yml) [![Discord](https://img.shields.io/discord/859140196498014238?style=flat&logo=discord&logoSize=auto&label=VF%20Server)](https://discord.gg/gxUQr77MT2)
 
 Cyancore is an open source unified software platform for embedded system projects. VisorFolks is motivated to develope a framework which enables a developer/user to write a portable project which can run on any of the target. It is designed to be a goto framework for almost all projects, be it an Embedded applications, IoT, firmware, OS, etc. It provides flexibility, tighter integration of features and abilities by utilizing the hardware and software resources better and boost various KPIs of the final product.
 
 
 If you'd like to learn and contribute to this project, please follow below links for full documentation and start your endeavor.
-
-
-### Join VisorFolks Community Forum
-Connect with us over VisorFolks discord server
-<a href="https://discord.gg/gxUQr77MT2"> <img align="center" alt="VisorFolks Discord Server" width="30px" src="https://discord.com/assets/3437c10597c1526c3dbd98c737c2bcae.svg" /> </a>
 
 ### Help
 - [**Getting Started**](https://github.com/VisorFolks/cyancore/wiki/Getting-Started)
