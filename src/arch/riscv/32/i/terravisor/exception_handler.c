@@ -1,6 +1,6 @@
 /*
  * CYANCORE LICENSE
- * Copyrights (C) 2019, Cyancore Team
+ * Copyrights (C) 2024, Cyancore Team
  *
  * File Name		: exception_handler.c
  * Description		: This file consists of sources for exception
@@ -67,7 +67,7 @@ void exception_handler(uint32_t mcause, context_frame_t *frame)
 	else
 	{
 		exhandler[cpuid][cause]();
-		frame->mepc += (MMIO8(frame->mepc) & 0x3) ? 4 : 2;
+		frame->mepc += (MMIO8(frame->mepc) & 0x2) ? 4 : 2;
 	}
 	set_context_frame(NULL);
 	fence(ow, ow);
