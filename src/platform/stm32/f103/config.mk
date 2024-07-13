@@ -3,9 +3,9 @@
 # Copyrights (C) 2019, Cyancore Team
 #
 # File Name		: config.mk
-# Description		: This file defines configuration for STM32F108
+# Description		: This file defines configuration for STM32F103
 # Primary Author	: Mohd Fahad [mohdfahad12328@gmail.com]
-# Organisation		: Cyancore Core-Team
+# Organisation		: Open Source Contribuitor
 #
 
 # TODO: only updated START and SIZE according to f103c8t6 only

@@ -4,8 +4,8 @@
 #
 # File Name		: config.mk
 # Description		: This file consists of project config
-# Primary Author	: Akash Kollipara [akashkollipara@gmail.com]
-# Organisation		: Cyancore Core-Team
+# Primary Author	: Mohd Fahad [mohdfahad12328@gmail.com]
+# Organisation		: Open Source Contribuitor
 #
 
 # NOTE [jul 13, 1:21 PM]: just copy pasted from demo.src/config.mk

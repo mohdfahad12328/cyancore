@@ -4,10 +4,10 @@
 #
 # File Name		: build.mk
 # Description		: This file accumulates the build scripts from
-#			  all other directories that have atmega328p
+#			  all other directories that have stm32f103
 #			  board support sources
-# Primary Author	: Akash Kollipara [akashkollipara@gmail.com]
-# Organisation		: Cyancore Core-Team
+# Primary Author	: Mohd Fahad [mohdfahad12328@gmail.com]
+# Organisation		: Open Source Contribuitor
 #
 
 F103_DIR	:= $(GET_PATH)

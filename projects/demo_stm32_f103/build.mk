@@ -5,7 +5,7 @@
 # File Name		: build.mk
 # Description		: This file build and gathers project properties
 # Primary Author	: Mohd Fahad [mohdfahad12328@gmail.com]
-# Organisation		: Cyancore Core-Team
+# Organisation		: Open Source Contribuitor
 #
 
 # NOTE [jul 13, 1:21 PM]: just copy pasted from demo.src/build.mk
