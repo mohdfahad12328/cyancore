@@ -30,7 +30,7 @@ $(TOOLS_ROOT)/qemu:
 $(QEMU_OUT_PATH): $(QEMU_PATH)
 	@echo "< ! > Building qemu ..."
 	@echo "< ? > Please be patient as this might take a while ..."
-	cd $<; ./configure --prefix=$(QEMU_OUT_PATH) --target-list=$(QEMU_TLIST) 2> /dev/null 1> /dev/null
+	cd $<; ./configure --prefix=$(QEMU_OUT_PATH) --target-list=$(QEMU_TLIST) --disable-werror 2> /dev/null 1> /dev/null
 	make -j $(N_JOBS) -C $< install 2> /dev/null 1> /dev/null
 	@echo "< ! > Cleaning up build space ..."
 	rm -rf $(QEMU_PATH)
@@ -55,4 +55,4 @@ endif
 	@echo
 	@echo "Press Ctrl+A - X to exit!"
 	@echo
-	$(QEMU_OUT_PATH)/bin/qemu-system-riscv32 -machine sifive_e -device loader,file=out/qemu_sifive_e_bl/qemu_sifive_e_bl.elf -kernel out/demo_qemu_sifive_e/demo_qemu_sifive_e.elf -nographic 
+	$(QEMU_OUT_PATH)/bin/qemu-system-riscv32 -machine sifive_e -device loader,file=out/qemu_sifive_e_bl/qemu_sifive_e_bl.elf -kernel out/demo_qemu_sifive_e/demo_qemu_sifive_e.elf -nographic
