@@ -55,4 +55,4 @@ endif
 	@echo
 	@echo "Press Ctrl+A - X to exit!"
 	@echo
-	$(QEMU_OUT_PATH)/bin/qemu-system-riscv32 -machine sifive_e -device loader,file=out/qemu_sifive_e_bl/qemu_sifive_e_bl.elf -kernel out/demo_qemu_sifive_e/demo_qemu_sifive_e.elf -nographic
+	$(QEMU_OUT_PATH)/bin/qemu-system-riscv32 -machine sifive_e -device loader,file=out/qemu_sifive_e_bl/qemu_sifive_e_bl.elf -kernel out/demo_qemu_sifive_e/demo_qemu_sifive_e.elf -nographic 
