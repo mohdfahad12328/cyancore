@@ -38,7 +38,7 @@ create_module(prci0, prci, 0x10008000, 0x1000, 0, 0);
 
 create_module(aon0, (aon | 0), 0x10000000, 0x1000, 0, 0);
 
-create_module(timer_core0, (timer | 0), 0, 0, 1e7, 0,
+create_module(timer_core0, (timer | 0), 0, 0, 32768, 0,
 		add_irq(0, int_local, 7, int_level));
 
 create_gpio_module(port0, (gpio | PORTA), 0x10012000, 0x4c);
