@@ -49,7 +49,7 @@ void *memcpy(void *i, const void *j, size_t size)
 	{
 		*dst++ = *src++;
 	}
-	return i;
+	return dst;
 }
 
 void *memmove(void *i, const void *j, size_t size)
